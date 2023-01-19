@@ -1,3 +1,11 @@
+2024-11-03  Isaac Keslassy <keslassy@gmail.com>
+
+	* backgammon.h, commands.inc, gnubg.c, gtkoptions.c, play.c:
+	* set.c: When reviewing mistakes in a game, allow the Go to Next
+	Marked and Go to Previous Marked buttons to jump only to the marked
+	moves of the same player than the first selected move.
+	Controlled by the Settings/Options/Other/Focus on same player checkbox.
+
 2024-04-28  Philippe Michel  <philippe.michel7@free.fr>
 
 	Version 1.08.003 released.

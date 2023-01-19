@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2008-20O9 Jon Kinsey <jonkinsey@gmail.com>
- * Copyright (C) 2008-2023 the AUTHORS
+ * Copyright (C) 2008-2024 the AUTHORS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1196,6 +1196,10 @@ static command acSetVariation[] = {
           szNAME, NULL },
     { "lang", CommandSetLang, N_("Set your language preference"),
       szLANG, NULL },
+#if defined(USE_GTK)
+    { "markedsameplayer", CommandSetMarkedSamePlayer,
+      N_("Focus on same player when moving between marked moves."), szONOFF, NULL },
+#endif
     { "matchequitytable", CommandSetMET,
       N_("Read match equity table from XML file"), szFILENAME, &cFilename },
     { "matchid", CommandSetMatchID, N_("set Match ID"), szMATCHID, NULL },

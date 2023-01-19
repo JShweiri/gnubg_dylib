@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 1999-2003 Gary Wong <gtw@gnu.org>
- * Copyright (C) 1999-2019 the AUTHORS
+ * Copyright (C) 1999-2024 the AUTHORS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +28,19 @@ shared subroutine.
 - ADDITIONAL MOTIVATION: when we save the analysis of this new match, we don't want
 to save it under the old match name and delete its analysis. So the user is forced
 today to correct the title manually.
+*/
+
+/*
+01/2023: Isaac Keslassy: introduced "fMarkedSamePlayer":
+- MOTIVATION: When reviewing her mistakes in a game, a user may not be interested
+     in the mistakes of her opponent. Unfortunately, the current red arrow that
+     enables users to skip moves and jump directly to the mistakes, also forces
+     them to check the mistakes of both players.
+- IDEA: Very simply, (1) a checkbox in Settings>Options>Other enables a user to focus
+    only on the marked moves of a given player.
+    (2) To do so, select a move of the desired player then click on next/previous
+    marked move as previously. If the checkbox was enabled, then it will skip
+    the opponent's mistakes.
 */
 
 #include "config.h"
@@ -3360,27 +3373,63 @@ extern int
 InternalCommandNext(int mark, int cmark, int n)
 {
     int done = 0;
+    // char tmp[FORMATEDMOVESIZE];
+    // TanBoard anBoard;
+
+    // g_message("start: fMarkedSamePlayer=%d, mark=%d, cmark=%d, n=%d\n",fMarkedSamePlayer,mark,cmark,n);
 
     if (mark || cmark) {
         listOLD *pgame;
         moverecord *pmr = NULL;
         listOLD *p = plLastMove->plNext;
+        int keyPlayer = -1;
+        int init = 1;
 
         for (pgame = lMatch.plNext; pgame->p != plGame && pgame != &lMatch; pgame = pgame->plNext);
         if (pgame->p != plGame)
             /* current game not found */
             return 0;
 
-        /* we need to increment the count if we're pointing to a marked move */
-        if (p->p && (mark && MoveIsMarked((moverecord *) p->p)))
+        /* we need to increment the count if we're pointing to a marked move
+        ... b/c if we initially point at a marked move, then when we start by it in the
+        while below we immediately decrement, so we essentially want to increment+decrement
+        to skip it in practice and look for the next one
+        */
+        if (p->p && (mark && MoveIsMarked((moverecord *) p->p))){
             ++n;
-        if (p->p && (cmark && MoveIsCMarked((moverecord *) p->p)))
+            // g_message("incremented to n=%d\n",n);
+        }
+        if (p->p && (cmark && MoveIsCMarked((moverecord *) p->p))){
             ++n;
+            // g_message("cmarked incremented to n=%d\n",n);
+        }
 
         while (p->p) {
             pmr = (moverecord *) p->p;
-            if (mark && MoveIsMarked(pmr) && (--n <= 0))
-                break;
+            /*
+            When the checkbox option fMarkedSamePlayer is set:
+            If we just call the function and get into this while loop for the first time,
+            then we set init=1 and determine the player that we want to focus on.
+            In the next marked moves, we check if it's the same player.
+            */
+            if(fMarkedSamePlayer && init){
+                keyPlayer=pmr->fPlayer;
+                init=0;
+            }
+            // InitBoard(anBoard, ms.bgv);
+            // g_message("player=%d, keyPlayer=%d,move index i=%d; move=%s, n=%d\n",pmr->fPlayer,keyPlayer,pmr->n.iMove, FormatMove(tmp, (ConstTanBoard) anBoard, pmr->n.anMove),n);
+
+            if(fMarkedSamePlayer){
+                if (mark  && (pmr->fPlayer == keyPlayer) && MoveIsMarked(pmr)  && (--n <= 0)){
+                    // g_message("got to break, n=%d\n",n);
+                    break;
+                }
+            } else {
+                if (mark && MoveIsMarked(pmr)  && (--n <= 0)){
+                    // g_message("got to break, n=%d\n",n);
+                    break;
+                }
+            }
             if (cmark && MoveIsCMarked(pmr) && (--n <= 0))
                 break;
             p = p->plNext;
@@ -3403,6 +3452,7 @@ InternalCommandNext(int mark, int cmark, int n)
             ChangeGame(pgame->p);
 
         plLastMove = p->plPrev;
+            //g_message("got to break, n=%d\n",plLastMove->p->);
         CalculateBoard();
         ShowMark(pmr);
     } else {
@@ -3718,6 +3768,9 @@ CommandPrevious(char *sz)
     int cmark = FALSE;
     listOLD *p;
     moverecord *pmr = NULL;
+    /*for debugging: */
+    // char tmp[FORMATEDMOVESIZE];
+    // TanBoard anBoard;
 
     if (!plGame) {
         outputl(_("No game in progress (type `new game' to start one)."));
@@ -3764,6 +3817,9 @@ CommandPrevious(char *sz)
 
     if (mark || cmark) {
         listOLD *pgame;
+        int keyPlayer = -1;
+        int init = 1;
+
         p = plLastMove;
 
         for (pgame = lMatch.plNext; pgame->p != plGame && pgame != &lMatch; pgame = pgame->plNext);
@@ -3773,8 +3829,35 @@ CommandPrevious(char *sz)
 
         while ((p->p) != 0) {
             pmr = (moverecord *) p->p;
-            if (mark && MoveIsMarked(pmr) && (--n <= 0))
-                break;
+
+            /* See explanations on fMarkedSamePlayer (focusing on same player when
+            jumping between marked moves) in function InternalCommandNext(); here
+            the commands are copied verbatim.
+            Note that here we look at the moves backwards, so we don't know the player
+            name of the current move, only that of the previous move. In general, it's
+            the other player: if player 0 played previously, it's likely that I am
+            now focusing on player 1.
+            However, if we are at the start of a game, the same player who
+            starts the game may also have ended the previous game. So in a small
+            minority of cases, we may switch to the wrong player.
+            */
+            // InitBoard(anBoard, ms.bgv);
+            // g_message("player=%d, keyPlayer=%d,move index i=%d; move=%s, n=%d\n",pmr->fPlayer,keyPlayer,pmr->n.iMove, FormatMove(tmp, (ConstTanBoard) anBoard, pmr->n.anMove),n);
+
+            if (fMarkedSamePlayer && init) {
+                keyPlayer=1-pmr->fPlayer;
+                init=0;
+            }
+            if (fMarkedSamePlayer) {
+                if (mark  && (pmr->fPlayer == keyPlayer) && MoveIsMarked(pmr)  && (--n <= 0)) {
+                    break;
+                }
+            } else {
+                if (mark && MoveIsMarked(pmr)  && (--n <= 0)) {
+                    break;
+                }
+            }
+
             if (cmark && MoveIsCMarked(pmr) && (--n <= 0))
                 break;
 

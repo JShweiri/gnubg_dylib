@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 1999-2003 Gary Wong <gtw@gnu.org>
- * Copyright (C) 1999-2023 the AUTHORS
+ * Copyright (C) 1999-2024 the AUTHORS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -467,6 +467,15 @@ CommandSetStyledGameList(char *sz)
     if (fX)
         ChangeGame(NULL);
 #endif
+}
+
+extern void
+CommandSetMarkedSamePlayer(char *sz)
+{
+
+    SetToggle("markedsameplayer", &fMarkedSamePlayer, sz,
+              _("Focus on same player when moving between marked moves."), _("Do not focus on same player when moving between marked moves."));
+
 }
 
 extern void
