@@ -14,8 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * $Id: matchequity.c,v 1.108 2022/03/12 20:39:35 plm Exp $
  */
 
 #include "config.h"
@@ -137,7 +135,7 @@ GetCubePrimeValue(int i, int j, int nCubeValue)
 /*
  * Calculate post-Crawford match equity table
  *
- * Formula taken from Zadeh, Management Science xx
+ * Formula taken from Zadeh, Management Science 23, 986 (1977)
  *
  * Input:
  *    rG: gammon rate for trailer
@@ -194,7 +192,7 @@ initPostCrawfordMET(float afMETPostCrawford[MAXSCORE],
 
 /*
  * Calculate match equity table from Zadeh's formula published
- * in Management Science xx.xx,xx.
+ * in Management Science 23, 986 (1977)
  *
  * Input:
  *    rG1: gammon rate for leader of match

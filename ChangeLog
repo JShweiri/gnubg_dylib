@@ -190,7 +190,7 @@
 
 	On 32-bit versions of the operating system this change by itself
 	is not enough (but is harmless). See
-	https://docs.microsoft.com/en-us/windows/desktop/Memory/4-gigabyte-tuning
+	https://learn.microsoft.com/en-us/windows/win32/memory/4-gigabyte-tuning
 	on how to enable it.
 
 2017-12-26  Philippe Michel  <philippe.michel7@sfr.fr>
