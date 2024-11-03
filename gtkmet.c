@@ -14,8 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * $Id: gtkmet.c,v 1.36 2022/08/30 18:38:35 plm Exp $
  */
 
 #include "config.h"
@@ -243,7 +241,8 @@ GTKShowMatchEquityTable(const unsigned int nMatchTo, const int anScore[2])
 
     /* similar tooltip is used in gtkoptions.c:append_match_options() */
     gtk_widget_set_tooltip_text(pwInvertButton,
-                                _("Use the specified match equity table "
+                                _("For non-symmetric tables, "
+                                  "use the specified match equity table "
                                   "around the other way (i.e., swap the players before "
                                   "looking up equities in the table)."));
 
