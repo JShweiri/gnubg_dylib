@@ -32,7 +32,7 @@
     <title>DESCRIPTIONS</title>
 
     <para>
-            <application moreinfo="none">GNU Backgammon</application> <citerefentry> <refentrytitle> gnubg </refentrytitle>
+            <application moreinfo="none">GNU Backgammon</application> <citerefentry> <refentrytitle>gnubg</refentrytitle>
                     <manvolnum>6</manvolnum> </citerefentry>
             plays and analyses backgammon games and matches. It is able to play and
             analyse both money games and tournament matches, evaluate and roll out
@@ -59,7 +59,7 @@
 </refsect1>
 <refsect1>
         <title>FILES</title>
-        <para><filename>~/.gnubg/gnubgautorc</filename>, <filename>~/.gnubg/gnubg.db</filename>, <filename>~/.gnubg/gnubg.gtkrc</filename></para>
+        <para><filename>~/.gnubg/gnubgautorc</filename>, <filename>~/.gnubg/gnubgrc</filename>, <filename>~/.gnubg/gnubg.db</filename></para>
 </refsect1>
 <refsect1>
         <title>Authors</title>
