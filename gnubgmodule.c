@@ -3426,18 +3426,17 @@ python_run_file(gpointer file)
 
     pch = g_strdup_printf("gnubg_InteractivePyShell_gui(['','-n', '%s'])\n", (char *) file);
     py_dict = PyModule_GetDict(PythonGnubgModule());
-    Py_INCREF(py_dict);
+    g_assert(py_dict);
 
     py_ret = PyRun_String(pch, Py_eval_input, PythonGnubgModule(), py_dict);
 
     if (py_ret) {
         Py_DECREF(py_ret);
     }
-    if (py_dict) {
-        Py_DECREF(py_dict);
-    }
     g_free(pch);
     g_free(file);
+
+    /* FALSE: to be discarded as event source after use by g_idle_add() */
     return FALSE;
 }
 #endif
