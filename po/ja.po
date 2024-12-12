@@ -13798,9 +13798,9 @@ msgstr "このGNU BackgammonはGUI非対応でコンパイルされています�
 #: set.c:1426 set.c:1446
 #, c-format
 msgid ""
-"(Note that this setting will have no effect until you `set player %s gnu'.)\n"
+"(Note that this setting will have no effect until you `set player %s gnubg'.)\n"
 msgstr ""
-"(この設定は `set player %s gnu' の設定をするまでは効果が無いことに注意してく"
+"(この設定は `set player %s gnubg' の設定をするまでは効果が無いことに注意してく"
 "ださい。)\n"
 
 #: set.c:1459

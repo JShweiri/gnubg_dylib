@@ -13144,9 +13144,9 @@ msgstr "This installation of GNU Backgammon was compiled without GUI support."
 #: set.c:1426 set.c:1446
 #, c-format
 msgid ""
-"(Note that this setting will have no effect until you `set player %s gnu'.)\n"
+"(Note that this setting will have no effect until you `set player %s gnubg'.)\n"
 msgstr ""
-"(Note that this setting will have no effect until you ‘set player %s gnu’.)\n"
+"(Note that this setting will have no effect until you ‘set player %s gnubg’.)\n"
 
 #: set.c:1459
 msgid ""

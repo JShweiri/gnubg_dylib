@@ -1433,7 +1433,7 @@ CommandSetPlayerChequerplay(char *sz)
 
     if (ap[iPlayerSet].pt != PLAYER_GNU)
         outputf(_("(Note that this setting will have no effect until you "
-                  "`set player %s gnu'.)\n"), ap[iPlayerSet].szName);
+                  "`set player %s gnubg'.)\n"), ap[iPlayerSet].szName);
 
     outputresume();
 }
@@ -1453,7 +1453,7 @@ CommandSetPlayerCubedecision(char *sz)
 
     if (ap[iPlayerSet].pt != PLAYER_GNU)
         outputf(_("(Note that this setting will have no effect until you "
-                  "`set player %s gnu'.)\n"), ap[iPlayerSet].szName);
+                  "`set player %s gnubg'.)\n"), ap[iPlayerSet].szName);
 
     outputresume();
 }

@@ -13626,10 +13626,10 @@ msgstr "GNU Backgammon kokoonpanosi on luotu ilman GUI -tukea."
 #: set.c:1426 set.c:1446
 #, c-format
 msgid ""
-"(Note that this setting will have no effect until you `set player %s gnu'.)\n"
+"(Note that this setting will have no effect until you `set player %s gnubg'.)\n"
 msgstr ""
 "Asetuksella ei ole vaikutusta, ennen kuin olet tehnyt valinnan 'set player "
-"%s gnu'.)\n"
+"%s gnubg'.)\n"
 
 #: set.c:1459
 msgid ""

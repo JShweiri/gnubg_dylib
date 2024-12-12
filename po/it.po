@@ -14006,10 +14006,9 @@ msgstr ""
 #: set.c:1426 set.c:1446
 #, c-format
 msgid ""
-"(Note that this setting will have no effect until you `set player %s gnu'.)\n"
+"(Note that this setting will have no effect until you `set player %s gnubg'.)\n"
 msgstr ""
-"(Nota che queste impostazioni non avranno effetto finchè non `setti il "
-"giocatore %s gnu'.)\n"
+"(Nota che queste impostazioni non avranno effetto finchè non `set player %s gnubg'.)\n"
 
 #: set.c:1459
 msgid ""

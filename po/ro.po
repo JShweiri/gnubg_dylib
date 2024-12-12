@@ -14147,10 +14147,10 @@ msgstr ""
 #: set.c:1426 set.c:1446
 #, c-format
 msgid ""
-"(Note that this setting will have no effect until you `set player %s gnu'.)\n"
+"(Note that this setting will have no effect until you `set player %s gnubg'.)\n"
 msgstr ""
 "(De notat că această setare nu va avea nici un efect până când execuţi `set "
-"player %s gnu'.)\n"
+"player %s gnubg'.)\n"
 
 #: set.c:1459
 msgid ""
