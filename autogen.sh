@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Copyright (C) 2002 Gary Wong <gtw@gnu.org>
-# Copyright (C) 2003-2018 the AUTHORS
+# Copyright (C) 2003-2024 the AUTHORS
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,15 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
-# $Id: autogen.sh,v 1.12 2019/09/15 17:54:57 plm Exp $
-
-# If we use libtool-2, libtoolize below will recreate them, but if we use
-# libtool-1 we don't want them, which could happen if we use a shared
-# source directory or work from a "make dist" made on a libtool-2 system.
-#
-rm -f m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4
 
 rm -f aclocal.m4
 aclocal -I m4
