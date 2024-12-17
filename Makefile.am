@@ -1,5 +1,5 @@
 # Copyright (C) 1998-2003 Gary Wong <gtw@gnu.org>
-# Copyright (C) 2003-2021 the AUTHORS
+# Copyright (C) 2003-2024 the AUTHORS
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,8 +13,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-## $Id: Makefile.am,v 1.275 2022/10/16 19:05:38 plm Exp $
 
 ACLOCAL_AMFLAGS = -I m4
 
@@ -257,15 +255,14 @@ AUTHORS: credits.sh
 #
 if WIN32
 copying.c: copying.awk
-	$(AWK) -f $(srcdir)/copying.awk < $(srcdir)/COPYING > $@
+	cd $(srcdir) && $(AWK) -f copying.awk < COPYING > $@
 
 copying.$(OBJEXT): copying.c
 	$(COMPILE) -c $< -o $@
 else
 copying.c: COPYING copying.awk
-	$(AWK) -f $(srcdir)/copying.awk < $(srcdir)/COPYING > $@
+	cd $(srcdir) && $(AWK) -f copying.awk < COPYING > $@
 endif
-
 
 #
 ##databases
