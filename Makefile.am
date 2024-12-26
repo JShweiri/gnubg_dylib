@@ -29,6 +29,8 @@ else
 localeloc=-DLOCALEDIR=\"$(localedir)\"
 endif 
 
+AM_CFLAGS = -fPIC
+
 AM_CPPFLAGS = -I$(srcdir)/lib -I$(builddir)/pixmaps -I$(srcdir)/pixmaps \
 	   $(localeloc) @FREETYPE2_CFLAGS@ @GLIB_CFLAGS@ \
 	   @LIBPNG_CFLAGS@ @GTK_CFLAGS@ @CAIRO_CFLAGS@ @PANGOCAIRO_CFLAGS@ \
@@ -57,9 +59,105 @@ endif
 
 BUILT_SOURCES = sgf_y.c sgf_l.c copying.c credits.c external_l.c external_y.c
 
-#
-## sources for building the main executable
-#
+lib_LTLIBRARIES = libgnubg.la
+
+libgnubg_la_SOURCES = \
+		analysis.c \
+		analysis.h \
+		backgammon.h \
+		bearoff.c \
+		bearoffgammon.c \
+		bearoffgammon.h \
+		bearoff.h \
+		boarddim.h \
+		boardpos.c \
+		boardpos.h \
+		common.h \
+		copying.c \
+		credits.c \
+		credits.h \
+		dbprovider.c \
+		dbprovider.h \
+		dice.c \
+		dice.h \
+		drawboard.c \
+		drawboard.h \
+		eval.c \
+		evallock.c \
+		eval.h \
+		export.c \
+		export.h \
+		external.c \
+		external.h \
+		external_l.l \
+		external_y.y \
+		file.c \
+		file.h \
+		format.c \
+		formatgs.c \
+		formatgs.h \
+		format.h \
+		glib-ext.c \
+		glib-ext.h \
+		gnubg.c \
+		gnubgmodule.c \
+		gnubgmodule.h \
+		html.c \
+		htmlimages.c \
+		import.c \
+		inc3d.h \
+		latex.c \
+		matchequity.c \
+		matchequity.h \
+		matchid.c \
+		matchid.h \
+		mec.c \
+		mec.h \
+		mtsupport.c \
+		multithread.c \
+		multithread.h \
+		openurl.c \
+		openurl.h \
+		osr.c \
+		osr.h \
+		output.c \
+		output.h \
+		play.c \
+		positionid.c \
+		positionid.h \
+		progress.c \
+		progress.h \
+		pylocdefs.h \
+		randomorg.h \
+		randomorg.c \
+		relational.c \
+		relational.h \
+		render.c \
+		render.h \
+		renderprefs.c \
+		renderprefs.h \
+		rollout.c \
+		rollout.h \
+		set.c \
+		sgf.c \
+		sgf.h \
+		sgf_l.l \
+		sgf_y.y \
+		show.c \
+		simpleboard.c \
+		simpleboard.h \
+		sound.c \
+		sound.h \
+		speed.c \
+		text.c \
+		timer.c \
+		util.h \
+		util.c
+
+# Ensure position-independent code and proper rpath for shared library
+libgnubg_la_CFLAGS = -fPIC
+libgnubg_la_CPPFLAGS = $(AM_CPPFLAGS)
+libgnubg_la_LDFLAGS = -version-info 0:0:0 -no-undefined -rpath $(libdir)
 
 gnubg_SOURCES = \
 		analysis.c \
