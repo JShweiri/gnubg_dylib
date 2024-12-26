@@ -175,7 +175,7 @@ if USE_BOARD3D
 libgnubg_la_LIBADD += -L$(srcdir)/board3d board3d/libboard3d.la $(GTKGLEXT_LIBS) $(GL_LIBS) $(GLU_LIBS) $(EPOXY_LIBS)
 endif
 
-libgnubg_la_LDFLAGS = $(gnubg_LDFLAGS)
+libgnubg_la_LDFLAGS = -fPIC -Wl,-install_name,@rpath/libgnubg.0.dylib
 
 gnubg_SOURCES = \
 		analysis.c \
