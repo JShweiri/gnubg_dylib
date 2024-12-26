@@ -157,7 +157,25 @@ libgnubg_la_SOURCES = \
 # Ensure position-independent code and proper rpath for shared library
 libgnubg_la_CFLAGS = -fPIC
 libgnubg_la_CPPFLAGS = $(AM_CPPFLAGS)
-libgnubg_la_LDFLAGS = -version-info 0:0:0 -no-undefined -rpath $(libdir)
+
+libgnubg_la_LIBADD = -L$(srcdir)/lib
+libgnubg_la_LIBADD += @GTK_LIBS@ @LIBPNG_LIBS@ @CAIRO_LIBS@ @PANGOCAIRO_LIBS@ \
+	      @GTHREAD_LIBS@ @GOBJECT_LIBS@ \
+	      @READLINE_LIBS@ @GMP_LIB@ @LTLIBOBJS@ \
+	      @FREETYPE2_LIBS@ @GLIB_LIBS@ @CANBERRA_LIBS@ \
+	      @LIBCURL@ $(OTHER_LIBS)
+
+if USE_SQLITE
+libgnubg_la_LIBADD += @SQLITE_LIBS@
+endif
+if USE_PYTHON
+libgnubg_la_LIBADD += @PYTHON_LIBS@
+endif
+if USE_BOARD3D
+libgnubg_la_LIBADD += -L$(srcdir)/board3d board3d/libboard3d.la $(GTKGLEXT_LIBS) $(GL_LIBS) $(GLU_LIBS) $(EPOXY_LIBS)
+endif
+
+libgnubg_la_LDFLAGS = $(gnubg_LDFLAGS)
 
 gnubg_SOURCES = \
 		analysis.c \
